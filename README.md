@@ -43,7 +43,7 @@ The analysis includes:
 4. Creating histograms, bar charts, scatterplots, and boxplots.
 5. Investigating relationships between fat content, food categories, origin, and contaminant concentrations.
 
-The `Total UB TEQ` measurement is being considered as the prediction target because it provides a combined upper-bound toxic-equivalent concentration for each food sample.
+The Total UB TEQ measurement is being considered as the prediction target because it provides a combined upper-bound toxic-equivalent concentration for each food sample.
 
 ## 5. Preliminary Observations
 
