@@ -1,20 +1,98 @@
 # Dioxin-Food-Contamination
-The project will be conducted from the perspective of a data analyst supporting the food-safety surveillance in Canada. The professional setting involves analyzing food contaminant monitoring data collected by the Canadian Food Inspection Agency (CFIA) to investigate whether measured dioxin concentrations can be predicted using food characteristics. The dataset contains laboratory measurements of dioxins and similar compounds found in food samples collected between 2014 and 2019. Dioxins are environmental pollutants that contaminate food during production and/or packaging. There are 419 known dioxins, around 30 if which have been identified as harmful to human health (World Health Organization). Monitoring these contaminants is important for understanding their distribution across food products and supporting evidence based food safety decisions. The project is also meant to help the general public by raising awareness of their presence of dioxins in certain foods and the need to change methods of food preparation to reduce their levels. 
-The dataset is publicly available through the Government of Canada’s Open Government Portal in a downloadable CSV file and published by the CFIA. The data was collected for food safety monitoring and targeted survey program to investigate dioxin levels present in food on the Canadian retail market. There is a total of 3,115 food samples were collected from retail stores across Canada, including meat, fish, dairy, vegetable oils, buts and ready-to-eat-meals. There are 17 columns which include food product origin, chemical component, measured concentration and unit, percent fat, food category and other characteristics.  Since the dataset focuses on food products and laboratory measurements of dioxin and dioxin-like compound concentrations in food samples collected by the CFIA, there are no personal identifiers or sensitive personal information. Privacy risks using this dataset are relatively low and available under the Open Government License of Canada which permits it's use and analysis. 
-There are still ethical considerations regarding how the data is analyzed and interpreted because it was collected through a targeted survey rather than random sampling, so the findings may not represent all food products available in Canada. There are also different sample sizes between food categories which could also introduce bias into the analysis. 
-https://open.canada.ca/data/en/dataset/ed3d3c4b-fed8-4f4f-8455-2507812676e9
-There doesn’t seem to be any missing data values but there are some entries that are in text instead of numerical and need to be corrected. There are also multiple rows for each sample taken to measure for different components which my visually over represent the sample size and many samples with unknown country of production. The data is only collected from certain foods (targeted sampling), with different groups of food having larger sample sizes than others which could affect model performance. Some numerical variables may need cleaning because of inconsistent data types and detection limits. The presence of different types of dioxins and measurement unit will need to be addressed to make sure that selected prediction target is scientifically comparable across observations. 
-Despite these limitations, the dataset is suitable for the proposed project because it contains a substantial number of measurements and several variables that can be evaluated as predictors. The analysis will involve cleaning and preparing the data, selecting an appropriate numerical concentration target and developing a Random Forest Regression model. Its predictive performance will be compared with Linear Regression using evaluation metrics such as mean absolute error, root mean squared error, and R2. The project us feasible within the course timeline because the dataset is publicly accessible, the analysis can be conducted using Python, and the modelling methods are supported by established machine-learning libraries.
-My three research questions:
-To what extent can food characteristics like product category, fat content and origin predict measured dioxin concentration?
-Does Random Forest Regression provide more accurate predictions of dioxin concentrations than a traditional Linear Regression model?
-Which food characteristics contribute most to the Random Forest Regression model’s predictions, and how does prediction accuracy differ across food categories?
-Impact Hypothesis
-My hypothesis is that Random Forest Regression will provide more accurate predictions for dioxin concentrations than Linear Regression because it can capture nonlinear relationships and interactions between food characteristics. I expect fat content and food category to be useful predictors, although their relative importance will be determined through model evaluation. The model could demonstrate the reliable predictive performance on unseen samples. The findings could help food-safety researchers identify characteristics associated with difference in dioxin concentrations and inform future monitoring priorities. However, predictions would not replace laboratory testing or establish whether particular foods are safe for consumption.																						
-Results:
-The useful results would look like visual representations of the data that showed dioxin concentrations that vary among different foods using boxplots, medians and statistical tests. This could help identify which foods have higher dioxin concentrations and where there needs to be more food monitoring.
-Technical Pipeline, Systems Thinking
-I would first import the CSV file and examine the dataset structure, variable types, missing values, and measurement units. Data cleaning will include converting the necessary variables into appropriate formats, addressing values affected by detection limits and identifying repeated measurements from the same sample. The next step will be looking for duplicates and inconsistent formats and convert units where I can make them all compatible. A scientifically comparable numerical concentration measurement will be selected as the prediction target. I will use summary statistics to calculate dioxin concentrations and the number of samples for each food category will be examined. Boxplots and histograms will be used to make visual comparisons between the food groups to investigate which have higher levels of dioxins. A scatterplot will be used to observe the relationship between fate content and measured amounts of dioxin, correlation and regression analysis may be used to determine if there is an association. Exploratory data analysis will be conducted to examine the distribution of measured dioxin concentrations across country of origin, percent fat and food product category to be used as predictor variables. I will use random forest regression to investigate the relationship between the predictors and the dioxin concentrations because of the potentially complex and nonlinear relationships between food characteristics and dioxin concentrations. The dataset will be divided into training and testing sets, ensuring that measurements from the same food sample are not included in both sets to prevent data leakage and a Linear Regression model will be developed for baseline comparison. The accuracy of the model will be evaluated using R2, mean absolute error and root mean squared error. The findings will be interpreted in relation to the research questions, where the analysis will focus on finding patterns and associations from the samples data. I will use graphs, summary tables and written explanations to discuss the results and interpret the findings.
-GenAI Boundaries, Verification and Professional Judgement 
-Generative AI tools such as ChatGPT may be used to assist with understanding machine-learning concepts and troubleshooting Python code. AI will not be used as a substitute for independently analyzing the dataset and interpreting the results. The selection of variables, data-cleaning procedures and machine- learning methods and conclusions will be based on my own evaluation of the dataset. Information about the dataset and its collection methods will be verified using official Government of Canada and CFIA sources. I will pay particular attention to potential AI errors like fabricated references, inappropriate statistical methods and misleading interpretations of model predictions. I will remain responsible that the Random Forest Regression model is evaluated appropriately, and that the final conclusions are supported by the results instead of AI-generated and potentially biased statements.
->
+# README – CFIA Dioxin Data Analysis
+
+## 1. Project Description
+
+This project analyzes data collected by the Canadian Food Inspection Agency (CFIA) on dioxins and dioxin-like compounds in selected food products between 2014 and 2019.
+
+The purpose of this analysis is to examine the distribution of contaminant concentrations, identify relationships between food characteristics and measured concentrations, and prepare the dataset for machine-learning analysis.
+
+The planned machine-learning component will compare Random Forest Regression with Linear Regression to determine which method provides more accurate predictions of contaminant concentrations.
+
+## 2. Data Source
+
+**Dataset:** Dioxins and Dioxin-like Compounds in Selected Foods (2014–2019)
+
+**Organization:** Canadian Food Inspection Agency (CFIA)
+
+**Source:** [Government of Canada Open Data Portal](https://open.canada.ca/data/en/dataset/ed3d3c4b-fed8-4f4f-8455-2507812676e9)
+
+The dataset contains approximately 96,565 measurement records from 3,115 food samples. It includes information about food products, origin, fat content, chemical components, measured concentrations, and detection limits.
+
+## 3. Software and Libraries
+
+The data profiling and exploratory analysis are conducted using Python.
+
+The following libraries are used:
+
+- pandas – Data cleaning and descriptive statistics
+- NumPy – Numerical operations
+- Matplotlib – Data visualization
+- Seaborn – Statistical visualizations
+- SciPy – Statistical analysis
+
+Scikit-learn will be used for the planned machine-learning models.
+
+## 4. Data Profiling and Exploratory Analysis
+
+The analysis includes:
+
+1. Examining dataset dimensions, variable types, and missing values.
+2. Identifying repeated measurements for individual food samples.
+3. Calculating descriptive statistics for contaminant concentrations.
+4. Creating histograms, bar charts, scatterplots, and boxplots.
+5. Investigating relationships between fat content, food categories, origin, and contaminant concentrations.
+
+The `Total UB TEQ` measurement is being considered as the prediction target because it provides a combined upper-bound toxic-equivalent concentration for each food sample.
+
+## 5. Preliminary Observations
+
+Initial data profiling indicates that contaminant concentrations are right-skewed, with some samples having substantially higher concentrations than others.
+
+A positive association was observed between fat content and Total UB TEQ concentrations, although the relationship was not particularly strong.
+
+The number of samples also differs between food categories, which may affect the reliability of comparisons and predictive model performance.
+
+These observations will help guide data preparation and the selection of appropriate modelling techniques.
+
+## 6. Data Limitations
+
+The dataset was collected through targeted surveillance rather than random sampling. Therefore, the findings may not represent all foods available in Canada.
+
+Other considerations include unequal sample sizes across food categories, concentrations below detection limits, and repeated chemical measurements for individual samples.
+
+These limitations will be addressed during data cleaning and model evaluation.
+
+## 7. Instructions for Running the Analysis
+
+1. Download the dataset from the Government of Canada Open Data Portal.
+2. Install Python and the required libraries.
+3. Place the CSV dataset and Python analysis script in the same folder.
+4. Run the Python script to generate descriptive statistics and visualizations.
+5. Review the resulting tables and charts.
+
+Required libraries can be installed using:
+
+```bash
+pip install pandas numpy matplotlib seaborn scipy
+```
+
+Run the analysis using:
+
+```bash
+python profile_cfia.py
+```
+
+## 8. Next Steps
+
+The next stage will involve preparing the data for Random Forest Regression and Linear Regression.
+
+The models will be evaluated using Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and R² to compare their predictive performance.
+
+The results will be used to assess which food characteristics contribute most to predicting measured contaminant concentrations.
+
+## 9. Data Attribution
+
+Canadian Food Inspection Agency. *Dioxins and dioxin-like compounds in selected foods (2014–2019).* Government of Canada Open Data Portal.
+
+The data is available under the Open Government Licence – Canada.
