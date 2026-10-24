@@ -1,1 +1,114 @@
+%pip install pandas matplotlib seaborn scipy scikit-learn
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
+df = pd.read_csv("dataset.csv")
+
+print(df.head())
+print(df.shape)
+print(df.columns.tolist())
+# Number of rows and columns
+print("Shape:", df.shape)
+
+# Data types and non-null counts
+df.info()
+
+# Missing values by column
+print(df.isna().sum())
+
+# Summary statistics
+print(df.describe(include="all").T)
+
+# Number of unique values
+print(df.nunique())
+# Select upper-bound total TEQ records
+samples = df[df["Component"] == "Total UB TEQ"].copy()
+
+# Rename the concentration column
+samples = samples.rename(
+    columns={"Result - Resultat": "UB_TEQ"}
+)
+
+print("Number of food samples:", len(samples))
+print(samples["UB_TEQ"].describe())
+plt.figure(figsize=(8, 5))
+
+sns.histplot(data=samples, x="UB_TEQ", bins=50)
+
+plt.title("Distribution of Total UB TEQ")
+plt.xlabel("Concentration (pg TEQ/g sample)")
+plt.ylabel("Number of samples")
+plt.show()
+top_products = samples["Product"].value_counts().head(12)
+
+plt.figure(figsize=(10, 6))
+sns.barplot(
+    x=top_products.values,
+    y=top_products.index
+)
+plt.title("Most Frequently Sampled Food Products")
+plt.xlabel("Number of samples")
+plt.ylabel("Food product")
+plt.show()
+fat_col = "Percent Fat - Pourcentage de graisse"
+
+samples["fat_pct"] = pd.to_numeric(
+    samples[fat_col],
+    errors="coerce"
+)
+plt.figure(figsize=(8, 5))
+
+sns.scatterplot(
+    data=samples,
+    x="fat_pct",
+    y="UB_TEQ",
+    alpha=0.4
+)
+
+plt.title("Fat Content vs Dioxin Concentration")
+plt.xlabel("Fat content (%)")
+plt.ylabel("Total UB TEQ (pg TEQ/g sample)")
+plt.show()
+print(
+    samples[["fat_pct", "UB_TEQ"]]
+    .corr(method="spearman")
+)
+plt.figure(figsize=(8, 5))
+
+sns.boxplot(
+    data=samples,
+    x="Function",
+    y="UB_TEQ",
+    showfliers=False
+)
+
+plt.title("Dioxin Concentration by Import Status")
+plt.xlabel("Import status")
+plt.ylabel("Total UB TEQ (pg TEQ/g sample)")
+plt.show()
+product_summary = (
+    samples.groupby("Product")["UB_TEQ"]
+    .agg(["count", "mean", "median", "std"])
+    .sort_values("count", ascending=False)
+)
+
+print(product_summary.head(15))
+origin_summary = (
+    samples.groupby("Function")["UB_TEQ"]
+    .agg(["count", "mean", "median", "std"])
+)
+
+print(origin_summary)
+for product, group in samples.groupby("Product"):
+    valid = group[["fat_pct", "UB_TEQ"]].dropna()
+
+    if len(valid) >= 20 and valid["fat_pct"].nunique() > 1:
+        correlation = valid["fat_pct"].corr(
+            valid["UB_TEQ"], method="spearman"
+        )
+        print(product, round(correlation, 3))
+product_summary.to_csv("product_summary.csv")
+origin_summary.to_csv("origin_summary.csv")
+samples.to_csv("cleaned_samples.csv", index=False)
