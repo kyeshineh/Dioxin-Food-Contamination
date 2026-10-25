@@ -96,3 +96,24 @@ The results will be used to assess which food characteristics contribute most to
 Canadian Food Inspection Agency. *Dioxins and dioxin-like compounds in selected foods (2014–2019).* Government of Canada Open Data Portal.
 
 The data is available under the Open Government Licence – Canada.
+
+flowchart TD
+    A["1. Raw CFIA Data<br/>2014–2019 food measurements"]
+    B["2. Data Profiling<br/>Types, missing values, duplicates"]
+    C["3. Data Cleaning<br/>Numeric conversion, detection limits"]
+    D["4. Data Restructuring<br/>One row per food sample"]
+    E["5. Exploratory Data Analysis<br/>Histograms, boxplots, correlations"]
+    F["6. Train-Test Split<br/>Separate samples"]
+    G["7. Feature Preparation<br/>Imputation and one-hot encoding"]
+    H["8. Model Training"]
+    I["Random Forest Regression"]
+    J["Linear Regression"]
+    K["9. Model Evaluation<br/>MAE, RMSE, R²"]
+    L["10. Interpretation<br/>Feature importance and limitations"]
+
+    A --> B --> C --> D --> E --> F --> G --> H
+    H --> I
+    H --> J
+    I --> K
+    J --> K
+    K --> L
