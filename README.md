@@ -96,6 +96,15 @@ The results will be used to assess which food characteristics contribute most to
 Canadian Food Inspection Agency. *Dioxins and dioxin-like compounds in selected foods (2014–2019).* Government of Canada Open Data Portal.
 
 The data is available under the Open Government Licence – Canada.
+### How to Run the Analysis
+
+1. Download the `CFIA_Data_Analysis.ipynb` notebook from the `code` folder.
+2. Open Google Colab at https://colab.research.google.com.
+3. Upload the notebook to Google Colab.
+4. Download `data_cleaned.csv` from the `data` folder and upload it to the Colab session.
+5. Select **Runtime → Run all**.
+6. Review the descriptive statistics, Figures 1–5, and Multiple Linear Regression results.
+7. The notebook generates model evaluation metrics, including MAE, RMSE, and R², along with the corresponding visualizations.
 ### AI Use Disclosure
 
 ChatGPT (OpenAI) was used to assist with Python code development, debugging, data preprocessing, visualizations, model implementation, and report writing. AI-generated code and explanations were reviewed and tested against the project dataset. Final results and interpretations were based on the outputs of the analysis.
